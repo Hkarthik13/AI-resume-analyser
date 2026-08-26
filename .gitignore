@@ -21,3 +21,6 @@ frontend/*.log
 Thumbs.db
 *.pdf
 .vercel
+.vercel/
+uv.lock
+pyproject.toml
