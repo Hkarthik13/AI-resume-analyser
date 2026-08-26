@@ -22,7 +22,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from pdf_reader import extract_text
+try:
+    from .pdf_reader import extract_text
+except ImportError:
+    from pdf_reader import extract_text
 
 
 def format_skill(keyword: str):
@@ -124,7 +127,12 @@ def build_mock_analysis(resume_text: str, job_description: str, warning: str | N
 def home():
     return {"message": "AI Resume Analyzer API is running"}
 
+@app.get("/api")
+def api_home():
+    return {"message": "AI Resume Analyzer API is running"}
+
 @app.post("/analyze")
+@app.post("/api/analyze")
 async def analyze(
     resume: UploadFile = File(...),
     job_description: str = Form(...)
@@ -200,3 +208,4 @@ async def analyze(
         
     except Exception as e:
         return build_mock_analysis(resume_text, job_description)
+

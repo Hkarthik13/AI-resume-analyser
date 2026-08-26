@@ -90,7 +90,7 @@ function App() {
       formData.append("resume", resumeFile);
       formData.append("job_description", jobDescription);
 
-      const response = await fetch("http://127.0.0.1:8000/analyze", {
+      const response = await fetch("/api/analyze", {
         method: "POST",
         body: formData,
       });
@@ -531,3 +531,4 @@ function App() {
 }
 
 export default App;
+
